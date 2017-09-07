@@ -1,6 +1,6 @@
 import localforage from 'localforage'
 
-import * as mutations from './mutation-types'
+import * as types from './mutation-types'
 import withQuery from '@/utils/with-query'
 import sign from '@/utils/sign'
 
@@ -49,7 +49,7 @@ export default {
     return new Promise((resolve, reject) => {
       q(query).then(({ session }) => {
         if (session) {
-          commit(mutations.UPDATE_SESSION, session)
+          commit(types.UPDATE_SESSION, session)
           saveSession(session)
           resolve()
         } else {
@@ -62,7 +62,7 @@ export default {
     return new Promise((resolve, reject) => {
       loadSession().then(session => {
         if (session) {
-          commit(mutations.UPDATE_SESSION, session)
+          commit(types.UPDATE_SESSION, session)
           resolve()
         } else {
           reject()
@@ -76,28 +76,28 @@ export default {
       method: 'user.getRecentTracks'
     })
 
-    q(query).then(({ recenttracks }) => commit(mutations.UPDATE_RECENT_TRACKS, recenttracks.track))
+    q(query).then(({ recenttracks }) => commit(types.UPDATE_RECENT_TRACKS, recenttracks.track))
   },
   getTopAlbums ({ commit }, params = {}) {
     const query = Object.assign({}, params, defaultParams, {
       method: 'user.getTopAlbums'
     })
 
-    q(query).then(({ topalbums }) => commit(mutations.UPDATE_TOP_ALBUMS, topalbums.album))
+    q(query).then(({ topalbums }) => commit(types.UPDATE_TOP_ALBUMS, topalbums.album))
   },
   getTopArtists ({ commit }, params = {}) {
     const query = Object.assign({}, params, defaultParams, {
       method: 'user.getTopArtists'
     })
 
-    q(query).then(({ topartists }) => commit(mutations.UPDATE_TOP_ARTISTS, topartists.artist))
+    q(query).then(({ topartists }) => commit(types.UPDATE_TOP_ARTISTS, topartists.artist))
   },
   getTopTracks ({ commit }, params) {
     const query = Object.assign({}, params, defaultParams, {
       method: 'user.getTopTracks'
     })
 
-    q(query).then(({ toptracks }) => commit(mutations.UPDATE_TOP_TRACKS, toptracks.track))
+    q(query).then(({ toptracks }) => commit(types.UPDATE_TOP_TRACKS, toptracks.track))
   },
   getUserInfo ({ commit }, user) {
     const query = Object.assign({}, defaultParams, {
@@ -106,7 +106,7 @@ export default {
       user
     })
 
-    q(query).then(({ user }) => { commit(mutations.UPDATE_USER_INFO, user) })
+    q(query).then(({ user }) => { commit(types.UPDATE_USER_INFO, user) })
   },
   loveTrack ({ commit, state }, track) {
     const params = {
@@ -121,7 +121,7 @@ export default {
       api_sig: sign(params)
     })
 
-    q(query, { method: 'POST' }).then(() => commit(mutations.LOVE_TRACK, track))
+    q(query, { method: 'POST' }).then(() => commit(types.LOVE_TRACK, track))
   },
   unloveTrack ({ commit, state }, track) {
     const params = {
@@ -136,6 +136,6 @@ export default {
       api_sig: sign(params)
     })
 
-    q(query, { method: 'POST' }).then(() => commit(mutations.UNLOVE_TRACK, track))
+    q(query, { method: 'POST' }).then(() => commit(types.UNLOVE_TRACK, track))
   }
 }
