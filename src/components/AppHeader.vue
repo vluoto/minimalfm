@@ -28,38 +28,38 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 header {
   height: 50px;
   display: flex;
   align-items: center;
   margin: 0 auto;
   background-color: whitesmoke;
-}
 
-nav {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-}
+  nav {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
 
-nav a {
-  color: #000;
-  text-decoration: none;
-}
+    a {
+      color: #000;
+      text-decoration: none;
+    }
 
-nav a:not(:last-of-type) {
-  margin-right: 10px;
-}
+    a:not(:last-of-type) {
+      margin-right: 10px;
+    }
 
-nav a:hover, nav .router-link-exact-active {
-  text-decoration: underline;
-}
+    a:hover, .router-link-exact-active {
+      text-decoration: underline;
+    }
+  }
 
-.profile-link {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 0;
+  .profile-link {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 0;
+  }
 }
 </style>

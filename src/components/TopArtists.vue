@@ -84,14 +84,14 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .artist-controls {
   display: flex;
   justify-content: center;
-}
 
-.artist-control:not(:last-of-type) {
-  margin-right: 10px;
+  .artist-control:not(:last-of-type) {
+    margin-right: 10px;
+  }
 }
 
 .artists {

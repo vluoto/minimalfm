@@ -19,15 +19,15 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .spinner-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 30px 0;
-}
 
-.spinner {
-  flex-grow: 1;
+  .spinner {
+    flex-grow: 1;
+  }
 }
 </style>

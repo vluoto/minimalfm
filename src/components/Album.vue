@@ -22,22 +22,22 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .album {
   position: relative;
-}
 
-.album-name {
-  color: #fff;
-  font-size: 20px;
-  position: absolute;
-  text-transform: uppercase;
-  bottom: 0;
-  left: 5px;
-}
+  .album-name {
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    text-transform: uppercase;
+    bottom: 0;
+    left: 5px;
+  }
 
-.album-image {
-  width: 300px;
-  height: 300px;
+  .album-image {
+    width: 300px;
+    height: 300px;
+  }
 }
 </style>

@@ -80,14 +80,14 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .track-controls {
   display: flex;
   justify-content: center;
-}
 
-.track-control:not(:last-of-type) {
-  margin-right: 10px;
+  .track-control:not(:last-of-type) {
+    margin-right: 10px;
+  }
 }
 
 .tracks {

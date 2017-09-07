@@ -69,50 +69,50 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .track {
   display: flex;
   align-items: center;
-}
 
-.track-image, .track-love {
-  margin-right: 10px;
-}
+  .track-image, .track-love {
+    margin-right: 10px;
+  }
 
-.track-image {
-  position: relative;
-  height: auto;
-  width: auto;
-  text-align: center;
-  font-size: 0;
-}
+  .track-image {
+    position: relative;
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 0;
+  }
 
-.track-rank {
-  display: flex;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: initial;
-  font-weight: 600;
-}
+  .track-rank {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: initial;
+    font-weight: 600;
+  }
 
-.track-love {
-  display: flex;
-  color: #000;
-}
+  .track-love {
+    display: flex;
+    color: #000;
+  }
 
-.track-name {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  padding-right: 10px;
-}
+  .track-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 10px;
+  }
 
-.track-date {
-  margin-left: auto;
-  white-space: nowrap;
+  .track-date {
+    margin-left: auto;
+    white-space: nowrap;
+  }
 }
 </style>

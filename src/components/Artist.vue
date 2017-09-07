@@ -20,17 +20,17 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .artist {
   position: relative;
-}
 
-.artist-name {
-  color: #fff;
-  font-size: 20px;
-  position: absolute;
-  text-transform: uppercase;
-  bottom: 0;
-  left: 5px;
+  .artist-name {
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    text-transform: uppercase;
+    bottom: 0;
+    left: 5px;
+  }
 }
 </style>

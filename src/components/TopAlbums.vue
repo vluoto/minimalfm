@@ -83,14 +83,14 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .album-controls {
   display: flex;
   justify-content: center;
-}
 
-.album-control:not(:last-of-type) {
-  margin-right: 10px;
+  .album-control:not(:last-of-type) {
+    margin-right: 10px;
+  }
 }
 
 .albums {
