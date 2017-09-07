@@ -118,10 +118,10 @@ export default {
   unloveTrack ({ commit, state }, track) {
     const params = {
       api_key: defaultParams.api_key,
-      artist: encodeURIComponent(track.artist.name),
+      artist: track.artist.name,
       method: 'track.unlove',
       sk: state.session.key,
-      track: encodeURIComponent(track.name)
+      track: track.name
     }
 
     const query = Object.assign({}, defaultParams, params, {
