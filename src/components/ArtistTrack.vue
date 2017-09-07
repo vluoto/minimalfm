@@ -6,7 +6,8 @@
       <a class="track-love" v-else @click.prevent @click="love(track)" href="#"><icon name="heart-o"></icon></a>
     </div>
     <span class="track-name">{{ track.artist.name }} –– {{ track.name }}</span>
-    <span v-if="!!track.date" class="track-date">{{ date }}</span>
+    <span class="track-date" v-if="!!date">{{ date }}</span>
+    <span class="track-date" v-if="isPlayingNow">Now playing</span>
   </div>
 </template>
 
@@ -33,14 +34,15 @@ export default {
         const ISOtimestamp = new Date(timestamp).toISOString()
 
         return moment(ISOtimestamp).fromNow()
-      } else {
-        return 'Now playing'
       }
     },
     image () {
       const [small] = this.track.image
 
       return small['#text']
+    },
+    isPlayingNow () {
+      return !!(this.track['@attr'] && this.track['@attr'].nowplaying)
     },
     loved () {
       return this.track.loved === '1'
