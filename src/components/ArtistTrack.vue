@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="track">
-    <img class="track-image" :src="image" :alt="alt">
+    <div class="track-image">
+      <span class="track-rank" v-if="hasRank">{{ rank }}.</span>
+      <img :src="image" :alt="alt">
+    </div>
     <div v-if="!!track.loved">
       <a class="track-love" v-if="loved" @click.prevent @click="unlove(track)" href="#"><icon name="heart"></icon></a>
       <a class="track-love" v-else @click.prevent @click="love(track)" href="#"><icon name="heart-o"></icon></a>
@@ -36,6 +39,9 @@ export default {
         return moment(ISOtimestamp).fromNow()
       }
     },
+    hasRank () {
+      return !!this.rank
+    },
     image () {
       const [small] = this.track.image
 
@@ -46,6 +52,9 @@ export default {
     },
     loved () {
       return this.track.loved === '1'
+    },
+    rank () {
+      return this.track['@attr'] && this.track['@attr'].rank
     }
   },
   methods: {
@@ -68,6 +77,26 @@ export default {
 
 .track-image, .track-love {
   margin-right: 10px;
+}
+
+.track-image {
+  position: relative;
+  height: auto;
+  width: auto;
+  text-align: center;
+  font-size: 0;
+}
+
+.track-rank {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: initial;
+  font-weight: 600;
 }
 
 .track-love {
