@@ -2,10 +2,16 @@ import * as mutations from './mutation-types'
 
 export default {
   [mutations.LOVE_TRACK] (state, track) {
-    track.loved = '1'
+    const cb = t => t.name === track.name && t.artist.name === track.artist.name
+    const result = state.recentTracks.find(cb)
+
+    if (result) result.loved = '1'
   },
   [mutations.UNLOVE_TRACK] (state, track) {
-    track.loved = '0'
+    const cb = t => t.name === track.name && t.artist.name === track.artist.name
+    const result = state.recentTracks.find(cb)
+
+    if (result) result.loved = '0'
   },
   [mutations.UPDATE_RECENT_TRACKS] (state, tracks) {
     state.recentTracks = tracks
