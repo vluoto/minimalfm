@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="artist">
     <span class="artist-name">{{ artist.name }}</span>
-    <img :src="image" :alt="artist.name">
+    <img class="artist-image" :src="image" :alt="artist.name">
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 .artist {
   position: relative;
 }

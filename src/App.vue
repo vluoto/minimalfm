@@ -69,7 +69,22 @@ h1 {
   text-align: center;
 }
 
-.button:hover {
+.button:hover, select:hover {
   background-color: #d50000;
+}
+
+select {
+  background-color: #b90000;
+  border: 0;
+  width: 150px;
+  border-radius: 0;
+  height: 30px;
+  -webkit-appearance: none;
+  text-align-last: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  outline: 0;
 }
 </style>
