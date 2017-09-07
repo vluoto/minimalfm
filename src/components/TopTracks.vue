@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 .track-controls {
   display: flex;
   justify-content: center;

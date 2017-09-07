@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 .spinner-container {
   display: flex;
   flex-direction: column;
