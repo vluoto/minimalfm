@@ -1,26 +1,28 @@
+import * as mutations from './mutation-types'
+
 export default {
-  loveTrack (state, track) {
+  [mutations.LOVE_TRACK] (state, track) {
     track.loved = '1'
   },
-  recentTracks (state, tracks) {
-    state.recentTracks = tracks
-  },
-  session (state, session) {
-    state.session = session
-  },
-  topAlbums (state, albums) {
-    state.topAlbums = albums
-  },
-  topArtists (state, artists) {
-    state.topArtists = artists
-  },
-  topTracks (state, tracks) {
-    state.topTracks = tracks
-  },
-  unloveTrack (state, track) {
+  [mutations.UNLOVE_TRACK] (state, track) {
     track.loved = '0'
   },
-  userInfo (state, userInfo) {
+  [mutations.UPDATE_RECENT_TRACKS] (state, tracks) {
+    state.recentTracks = tracks
+  },
+  [mutations.UPDATE_SESSION] (state, session) {
+    state.session = session
+  },
+  [mutations.UPDATE_TOP_ALBUMS] (state, albums) {
+    state.topAlbums = albums
+  },
+  [mutations.UPDATE_TOP_ARTISTS] (state, artists) {
+    state.topArtists = artists
+  },
+  [mutations.UPDATE_TOP_TRACKS] (state, tracks) {
+    state.topTracks = tracks
+  },
+  [mutations.UPDATE_USER_INFO] (state, userInfo) {
     state.userInfo = userInfo
   }
 }
