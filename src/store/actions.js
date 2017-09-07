@@ -9,7 +9,7 @@ const defaultParams = {
   format: 'json'
 }
 
-function q (query, fetchOptions = {}) {
+const q = (query, fetchOptions = {}) => {
   return fetch(withQuery(process.env.LASTFM_API_URL, query), fetchOptions).then(response => {
     return response.json()
   })
