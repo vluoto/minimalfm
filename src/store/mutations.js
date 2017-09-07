@@ -14,6 +14,9 @@ export default {
   topArtists (state, artists) {
     state.topArtists = artists
   },
+  topTracks (state, tracks) {
+    state.topTracks = tracks
+  },
   unloveTrack (state, track) {
     track.loved = '0'
   },

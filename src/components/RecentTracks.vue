@@ -20,7 +20,7 @@ export default {
 
   data () {
     return {
-      limit: 20
+      limit: 25
     }
   },
   created () {
@@ -57,6 +57,6 @@ export default {
 <style scoped lang="css">
 .tracks {
   width: 600px;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 </style>

@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">Recent Tracks</router-link>
       <router-link to="/top-artists">Top Artists</router-link>
+      <router-link to="/top-tracks">Top Tracks</router-link>
       <router-link to="/top-albums">Top Albums</router-link>
     </nav>
 

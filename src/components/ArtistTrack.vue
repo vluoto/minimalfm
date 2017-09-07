@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="track">
-    <img class="track-image" :src="image" :alt="albumName">
-    <a class="track-love" v-if="loved" @click.prevent @click="unlove(track)" href="#"><icon name="heart"></icon></a>
-    <a class="track-love" v-else @click.prevent @click="love(track)" href="#"><icon name="heart-o"></icon></a>
-    <span class="track-name">{{ track.artist.name }} - {{ track.name }}</span>
-    <span class="track-date">{{ date }}</span>
+    <img class="track-image" :src="image" :alt="alt">
+    <div v-if="!!track.loved">
+      <a class="track-love" v-if="loved" @click.prevent @click="unlove(track)" href="#"><icon name="heart"></icon></a>
+      <a class="track-love" v-else @click.prevent @click="love(track)" href="#"><icon name="heart-o"></icon></a>
+    </div>
+    <span class="track-name">{{ track.artist.name }} –– {{ track.name }}</span>
+    <span v-if="!!track.date" class="track-date">{{ date }}</span>
   </div>
 </template>
 
@@ -20,8 +22,8 @@ export default {
   props: ['track'],
 
   computed: {
-    albumName () {
-      return this.track.album['#text']
+    alt () {
+      return this.track.album ? this.track.album['#text'] : this.track.name
     },
     date () {
       const { date } = this.track

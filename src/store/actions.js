@@ -84,12 +84,19 @@ export default {
 
     q(query).then(({ topalbums }) => commit('topAlbums', topalbums.album))
   },
-  getTopArtists ({ commit, state }, params = {}) {
+  getTopArtists ({ commit }, params = {}) {
     const query = Object.assign({}, params, defaultParams, {
       method: 'user.getTopArtists'
     })
 
     q(query).then(({ topartists }) => commit('topArtists', topartists.artist))
+  },
+  getTopTracks ({ commit }, params) {
+    const query = Object.assign({}, params, defaultParams, {
+      method: 'user.getTopTracks'
+    })
+
+    q(query).then(({ toptracks }) => commit('topTracks', toptracks.track))
   },
   getUserInfo ({ commit }, user) {
     const query = Object.assign({}, defaultParams, {

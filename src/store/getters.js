@@ -8,6 +8,9 @@ export default {
   topArtists (state) {
     return state.topArtists
   },
+  topTracks (state) {
+    return state.topTracks
+  },
   user (state) {
     return state.session && state.session.name
   },

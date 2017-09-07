@@ -3,5 +3,6 @@ export default {
   session: null,
   topAlbums: [],
   topArtists: [],
+  topTracks: [],
   userInfo: null
 }
