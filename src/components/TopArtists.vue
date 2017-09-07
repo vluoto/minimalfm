@@ -4,11 +4,11 @@
 
     <div class="artist-controls">
       <select v-model="limit" @change="getTopArtistsFor(user)" class="artist-control">
-        <option v-for="item in limits" :value="item.value">{{ item.text }}</option>
+        <option v-for="(item, index) in limits" :value="item.value" :key="index">{{ item.text }}</option>
       </select>
 
       <select v-model="period" @change="getTopArtistsFor(user)" class="artist-control">
-        <option v-for="item in periods" :value="item.value">{{ item.text }}</option>
+        <option v-for="(item, index) in periods" :value="item.value" :key="index">{{ item.text }}</option>
       </select>
     </div>
 
