@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Auth from '@/components/Auth'
 import Login from '@/components/Login'
 import RecentTracks from '@/components/RecentTracks'
+import TopAlbums from '@/components/TopAlbums'
 import TopArtists from '@/components/TopArtists'
 
 Vue.use(Router)
@@ -25,6 +26,11 @@ export default new Router({
       path: '/auth',
       name: 'Auth',
       component: Auth
+    },
+    {
+      path: '/top-albums',
+      name: 'TopAlbums',
+      component: TopAlbums
     },
     {
       path: '/top-artists',

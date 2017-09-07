@@ -8,6 +8,9 @@ export default {
   session (state, session) {
     state.session = session
   },
+  topAlbums (state, albums) {
+    state.topAlbums = albums
+  },
   topArtists (state, artists) {
     state.topArtists = artists
   },

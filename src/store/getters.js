@@ -2,6 +2,9 @@ export default {
   recentTracks (state) {
     return state.recentTracks
   },
+  topAlbums (state) {
+    return state.topAlbums
+  },
   topArtists (state) {
     return state.topArtists
   },

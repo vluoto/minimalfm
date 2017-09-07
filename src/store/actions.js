@@ -77,6 +77,13 @@ export default {
 
     q(query).then(({ recenttracks }) => commit('recentTracks', recenttracks.track))
   },
+  getTopAlbums ({ commit }, params = {}) {
+    const query = Object.assign({}, params, defaultParams, {
+      method: 'user.getTopAlbums'
+    })
+
+    q(query).then(({ topalbums }) => commit('topAlbums', topalbums.album))
+  },
   getTopArtists ({ commit, state }, params = {}) {
     const query = Object.assign({}, params, defaultParams, {
       method: 'user.getTopArtists'
