@@ -71,6 +71,7 @@ export default {
 }
 
 .track-love {
+  display: flex;
   color: #000;
 }
 
@@ -78,10 +79,11 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  max-width: 400px;
+  padding-right: 10px;
 }
 
 .track-date {
   margin-left: auto;
+  white-space: nowrap;
 }
 </style>
