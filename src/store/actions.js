@@ -9,6 +9,14 @@ const defaultParams = {
   format: 'json'
 }
 
+const loadSession = (session) => {
+  return localforage.getItem(
+    'session'
+  ).then(value => {
+    return value
+  })
+}
+
 const q = (query, fetchOptions = {}) => {
   return fetch(withQuery(process.env.LASTFM_API_URL, query), fetchOptions).then(response => {
     return response.json()
@@ -26,14 +34,6 @@ const saveSession = (session) => {
   })
 }
 
-const loadSession = (session) => {
-  return localforage.getItem(
-    'session'
-  ).then(value => {
-    return value
-  })
-}
-
 export default {
   authenticate ({ commit }, token) {
     const params = {
@@ -42,9 +42,11 @@ export default {
       token
     }
 
-    const query = Object.assign({}, defaultParams, params, {
+    const query = {
+      ...defaultParams,
+      ...params,
       api_sig: sign(params)
-    })
+    }
 
     return new Promise((resolve, reject) => {
       q(query).then(({ session }) => {
@@ -71,40 +73,48 @@ export default {
     })
   },
   getRecentTracks ({ commit, state }, params = {}) {
-    const query = Object.assign({}, params, defaultParams, {
+    const query = {
+      ...defaultParams,
+      ...params,
       extended: 1,
       method: 'user.getRecentTracks'
-    })
+    }
 
     q(query).then(({ recenttracks }) => commit(types.UPDATE_RECENT_TRACKS, recenttracks.track))
   },
   getTopAlbums ({ commit }, params = {}) {
-    const query = Object.assign({}, params, defaultParams, {
+    const query = {
+      ...defaultParams,
+      ...params,
       method: 'user.getTopAlbums'
-    })
+    }
 
     q(query).then(({ topalbums }) => commit(types.UPDATE_TOP_ALBUMS, topalbums.album))
   },
   getTopArtists ({ commit }, params = {}) {
-    const query = Object.assign({}, params, defaultParams, {
+    const query = {
+      ...defaultParams,
+      ...params,
       method: 'user.getTopArtists'
-    })
+    }
 
     q(query).then(({ topartists }) => commit(types.UPDATE_TOP_ARTISTS, topartists.artist))
   },
   getTopTracks ({ commit }, params) {
-    const query = Object.assign({}, params, defaultParams, {
+    const query = {
+      ...defaultParams,
+      ...params,
       method: 'user.getTopTracks'
-    })
+    }
 
     q(query).then(({ toptracks }) => commit(types.UPDATE_TOP_TRACKS, toptracks.track))
   },
   getUserInfo ({ commit }, user) {
-    const query = Object.assign({}, defaultParams, {
-      api_key: defaultParams.api_key,
+    const query = {
+      ...defaultParams,
       method: 'user.getInfo',
       user
-    })
+    }
 
     q(query).then(({ user }) => { commit(types.UPDATE_USER_INFO, user) })
   },
@@ -117,9 +127,11 @@ export default {
       track: track.name
     }
 
-    const query = Object.assign({}, defaultParams, params, {
+    const query = {
+      ...defaultParams,
+      ...params,
       api_sig: sign(params)
-    })
+    }
 
     q(query, { method: 'POST' }).then(() => commit(types.LOVE_TRACK, track))
   },
@@ -132,9 +144,11 @@ export default {
       track: track.name
     }
 
-    const query = Object.assign({}, defaultParams, params, {
+    const query = {
+      ...defaultParams,
+      ...params,
       api_sig: sign(params)
-    })
+    }
 
     q(query, { method: 'POST' }).then(() => commit(types.UNLOVE_TRACK, track))
   }
