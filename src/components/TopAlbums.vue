@@ -17,12 +17,9 @@ import { mapActions, mapGetters } from 'vuex'
 import Album from '@/components/Album'
 import Controls from '@/components/Controls'
 import Spinner from '@/components/Spinner'
-import { requiresSession } from './mixins/requires-session'
 
 export default {
   name: 'TopAlbums',
-
-  mixins: [requiresSession],
 
   created () {
     this.updateAlbums(25, '3month')

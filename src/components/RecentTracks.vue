@@ -14,12 +14,9 @@ import { mapActions, mapGetters } from 'vuex'
 
 import ArtistTrack from '@/components/ArtistTrack'
 import Spinner from '@/components/Spinner'
-import { requiresSession } from './mixins/requires-session'
 
 export default {
   name: 'RecentTracks',
-
-  mixins: [requiresSession],
 
   data () {
     return {

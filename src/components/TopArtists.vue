@@ -17,12 +17,9 @@ import { mapActions, mapGetters } from 'vuex'
 import Artist from '@/components/Artist'
 import Controls from '@/components/Controls'
 import Spinner from '@/components/Spinner'
-import { requiresSession } from './mixins/requires-session'
 
 export default {
   name: 'TopArtists',
-
-  mixins: [requiresSession],
 
   created () {
     this.updateArtists(25, '3month')
