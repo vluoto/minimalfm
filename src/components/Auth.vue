@@ -2,20 +2,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import store from '@/store'
 
 export default {
   name: 'Auth',
 
-  created () {
-    this.authenticate(this.$route.query.token).then(() => {
-      this.$router.push('/')
+  beforeRouteEnter (to, from, next) {
+    store.dispatch('authenticate', to.query.token).then(() => {
+      next('/')
     }).catch(() => {
-      this.$router.push('/login')
+      next('/login')
     })
-  },
-  methods: {
-    ...mapActions(['authenticate'])
   }
 }
 </script>

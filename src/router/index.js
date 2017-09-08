@@ -11,6 +11,14 @@ import store from '@/store'
 
 Vue.use(Router)
 
+const requireAuth = (to, from, next) => {
+  store.dispatch('checkAuth').then(() => {
+    next()
+  }).catch(() => {
+    next('/login')
+  })
+}
+
 const router = new Router({
   mode: 'history',
   routes: [
@@ -18,9 +26,7 @@ const router = new Router({
       path: '/',
       name: 'RecentTracks',
       component: RecentTracks,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/login',
@@ -36,37 +42,21 @@ const router = new Router({
       path: '/top-albums',
       name: 'TopAlbums',
       component: TopAlbums,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/top-artists',
       name: 'TopArtists',
       component: TopArtists,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/top-tracks',
       name: 'TopTracks',
       component: TopTracks,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     }
   ]
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    store.dispatch('checkAuth').then(() => {
-      next()
-    }).catch(() => {
-      next({ path: '/login' })
-    })
-  }
 })
 
 export default router

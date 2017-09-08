@@ -52,8 +52,9 @@ export default {
       q(query).then(({ session }) => {
         if (session) {
           commit(types.UPDATE_SESSION, session)
-          saveSession(session)
-          resolve()
+          saveSession(session).finally(() => {
+            resolve()
+          })
         } else {
           reject()
         }
