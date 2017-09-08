@@ -3,11 +3,11 @@
     <h1>Top Albums</h1>
 
     <div class="album-controls">
-      <select v-model="limit" @change="getTopAlbumsFor(user)" class="album-control">
+      <select v-model="limit" @change="getAlbums" class="album-control">
         <option v-for="item in limits" :value="item.value">{{ item.text }}</option>
       </select>
 
-      <select v-model="period" @change="getTopAlbumsFor(user)" class="album-control">
+      <select v-model="period" @change="getAlbums" class="album-control">
         <option v-for="item in periods" :value="item.value">{{ item.text }}</option>
       </select>
     </div>
@@ -53,15 +53,18 @@ export default {
     }
   },
   created () {
-    const { limit, period, user } = this
-
-    this.getTopAlbums({ limit, period, user })
+    this.getAlbums()
   },
   computed: {
     ...mapGetters(['topAlbums', 'user'])
   },
   methods: {
-    ...mapActions(['getTopAlbums'])
+    ...mapActions(['getTopAlbums']),
+    getAlbums () {
+      const { limit, period, user } = this
+
+      this.getTopAlbums({ limit, period, user })
+    }
   },
   components: {
     Album,

@@ -3,11 +3,11 @@
     <h1>Top Artists</h1>
 
     <div class="artist-controls">
-      <select v-model="limit" @change="getTopArtistsFor(user)" class="artist-control">
+      <select v-model="limit" @change="getArtists" class="artist-control">
         <option v-for="(item, index) in limits" :value="item.value" :key="index">{{ item.text }}</option>
       </select>
 
-      <select v-model="period" @change="getTopArtistsFor(user)" class="artist-control">
+      <select v-model="period" @change="getArtists" class="artist-control">
         <option v-for="(item, index) in periods" :value="item.value" :key="index">{{ item.text }}</option>
       </select>
     </div>
@@ -53,15 +53,18 @@ export default {
     }
   },
   created () {
-    const { limit, period, user } = this
-
-    this.getTopArtists({ limit, period, user })
+    this.getArtists()
   },
   computed: {
     ...mapGetters(['topArtists', 'user'])
   },
   methods: {
-    ...mapActions(['getTopArtists'])
+    ...mapActions(['getTopArtists']),
+    getArtists () {
+      const { limit, period, user } = this
+
+      this.getTopArtists({ limit, period, user })
+    }
   },
   components: {
     Artist,

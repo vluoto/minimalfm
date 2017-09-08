@@ -3,11 +3,11 @@
     <h1>Top Tracks</h1>
 
     <div class="track-controls">
-      <select v-model="limit" @change="getTopTracksFor(user)" class="track-control">
+      <select v-model="limit" @change="getTracks" class="track-control">
         <option v-for="item in limits" :value="item.value">{{ item.text }}</option>
       </select>
 
-      <select v-model="period" @change="getTopTracksFor(user)" class="track-control">
+      <select v-model="period" @change="getTracks" class="track-control">
         <option v-for="item in periods" :value="item.value">{{ item.text }}</option>
       </select>
     </div>
@@ -53,15 +53,18 @@ export default {
     }
   },
   created () {
-    const { limit, period, user } = this
-
-    this.getTopTracks({ limit, period, user })
+    this.getTracks()
   },
   computed: {
     ...mapGetters(['topTracks', 'user'])
   },
   methods: {
-    ...mapActions(['getTopTracks'])
+    ...mapActions(['getTopTracks']),
+    getTracks () {
+      const { limit, period, user } = this
+
+      this.getTopTracks({ limit, period, user })
+    }
   },
   components: {
     ArtistTrack,
