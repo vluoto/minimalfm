@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import withQuery from '@/utils/with-query'
 import sign from '@/utils/sign'
-import { saveSession } from '@/utils/auth'
+import { restoreSession, saveSession } from '@/utils/auth'
 
 const defaultParams = {
   api_key: process.env.LASTFM_API_KEY,
@@ -103,6 +103,11 @@ export default {
     }
 
     q(query, { method: 'POST' }).then(() => commit(types.LOVE_TRACK, track))
+  },
+  restoreSession ({ commit }) {
+    return restoreSession().then((session) => {
+      commit(types.UPDATE_SESSION, session)
+    })
   },
   unloveTrack ({ commit, state }, track) {
     const params = {

@@ -7,15 +7,12 @@ import RecentTracks from '@/components/RecentTracks'
 import TopAlbums from '@/components/TopAlbums'
 import TopArtists from '@/components/TopArtists'
 import TopTracks from '@/components/TopTracks'
-import { restoreSession } from '@/utils/auth'
 import store from '@/store'
-import * as types from '@/store/mutation-types'
 
 Vue.use(Router)
 
-const requireAuth = (to, from, next) => {
-  restoreSession().then((session) => {
-    store.commit(types.UPDATE_SESSION, session)
+export const requireAuth = (to, from, next) => {
+  store.dispatch('restoreSession').then(() => {
     next()
   }).catch(() => {
     next('/login')
