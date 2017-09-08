@@ -1,30 +1,20 @@
 <template>
   <div id="app">
-    <app-header v-if="isAuthenticated"></app-header>
+    <app-header v-if="!!user"></app-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 import AppHeader from '@/components/AppHeader'
 
 export default {
   name: 'App',
 
-  created () {
-    this.checkAuth().catch(() => {
-      this.$router.push('/login')
-    })
-  },
   computed: {
-    ...mapGetters({
-      isAuthenticated: 'user'
-    })
-  },
-  methods: {
-    ...mapActions(['checkAuth'])
+    ...mapGetters(['user'])
   },
   components: {
     AppHeader

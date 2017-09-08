@@ -12,8 +12,8 @@
       </select>
     </div>
 
-    <div v-if="albums.length > 0" class="albums">
-      <album v-for="album in albums" :album="album" :key="album.id" />
+    <div v-if="topAlbums.length > 0" class="albums">
+      <album v-for="album in topAlbums" :album="album" :key="album.id" />
     </div>
     <spinner v-else></spinner>
   </div>
@@ -24,9 +24,12 @@ import { mapActions, mapGetters } from 'vuex'
 
 import Album from '@/components/Album'
 import Spinner from '@/components/Spinner'
+import { requiresSession } from './mixins/requires-session'
 
 export default {
   name: 'TopAlbums',
+
+  mixins: [requiresSession],
 
   data () {
     return {
@@ -50,31 +53,15 @@ export default {
     }
   },
   created () {
-    // FIXME: Figure out how to ensure `user` is available before entering the route.
-    if (this.user) {
-      this.getTopAlbumsFor(this.user)
-    }
+    const { limit, period, user } = this
+
+    this.getTopAlbums({ limit, period, user })
   },
   computed: {
-    ...mapGetters({
-      albums: 'topAlbums',
-      user: 'user'
-    })
+    ...mapGetters(['topAlbums', 'user'])
   },
   methods: {
-    ...mapActions(['getTopAlbums']),
-    getTopAlbumsFor (user) {
-      this.getTopAlbums({
-        limit: this.limit,
-        period: this.period,
-        user
-      })
-    }
-  },
-  watch: {
-    user (user) {
-      this.getTopAlbumsFor(user)
-    }
+    ...mapActions(['getTopAlbums'])
   },
   components: {
     Album,

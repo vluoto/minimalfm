@@ -12,8 +12,8 @@
       </select>
     </div>
 
-    <div v-if="tracks.length > 0" class="tracks">
-      <artist-track v-for="(track, index) in tracks" :track="track" :key="index" />
+    <div v-if="topTracks.length > 0" class="tracks">
+      <artist-track v-for="(track, index) in topTracks" :track="track" :key="index" />
     </div>
     <spinner v-else></spinner>
   </div>
@@ -24,9 +24,12 @@ import { mapActions, mapGetters } from 'vuex'
 
 import ArtistTrack from '@/components/ArtistTrack'
 import Spinner from '@/components/Spinner'
+import { requiresSession } from './mixins/requires-session'
 
 export default {
   name: 'TopTracks',
+
+  mixins: [requiresSession],
 
   data () {
     return {
@@ -50,28 +53,15 @@ export default {
     }
   },
   created () {
-    // FIXME: Figure out how to ensure `user` is available before entering the route.
-    if (this.user) {
-      this.getTopTracksFor(this.user)
-    }
+    const { limit, period, user } = this
+
+    this.getTopTracks({ limit, period, user })
   },
   computed: {
-    ...mapGetters({
-      tracks: 'topTracks',
-      user: 'user'
-    })
+    ...mapGetters(['topTracks', 'user'])
   },
   methods: {
-    ...mapActions(['getTopTracks']),
-    getTopTracksFor (user) {
-      this.getTopTracks({ limit: this.limit, period: this.period, user })
-    }
-  },
-  watch: {
-    // FIXME: Figure out how to ensure `user` is available before entering the route.
-    user (user) {
-      this.getTopTracksFor(user)
-    }
+    ...mapActions(['getTopTracks'])
   },
   components: {
     ArtistTrack,
