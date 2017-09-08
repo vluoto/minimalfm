@@ -33,10 +33,9 @@ export default {
       const { date } = this.track
 
       if (date) {
-        const timestamp = date['#text']
-        const ISOtimestamp = new Date(timestamp).toISOString()
+        const timestamp = new Date(1000 * date.uts)
 
-        return moment(ISOtimestamp).fromNow()
+        return moment(timestamp).fromNow()
       }
     },
     hasRank () {
