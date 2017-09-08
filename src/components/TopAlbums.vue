@@ -2,15 +2,7 @@
   <div class="top-albums">
     <h1>Top Albums</h1>
 
-    <div class="album-controls">
-      <select v-model="limit" @change="getAlbums" class="album-control">
-        <option v-for="item in limits" :value="item.value">{{ item.text }}</option>
-      </select>
-
-      <select v-model="period" @change="getAlbums" class="album-control">
-        <option v-for="item in periods" :value="item.value">{{ item.text }}</option>
-      </select>
-    </div>
+    <controls :change="updateAlbums"></controls>
 
     <div v-if="topAlbums.length > 0" class="albums">
       <album v-for="album in topAlbums" :album="album" :key="album.id" />
@@ -23,6 +15,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import Album from '@/components/Album'
+import Controls from '@/components/Controls'
 import Spinner from '@/components/Spinner'
 import { requiresSession } from './mixins/requires-session'
 
@@ -31,58 +24,27 @@ export default {
 
   mixins: [requiresSession],
 
-  data () {
-    return {
-      limit: 25,
-      limits: [
-        { text: 'Top 5', value: 5 },
-        { text: 'Top 10', value: 10 },
-        { text: 'Top 25', value: 25 },
-        { text: 'Top 50', value: 50 },
-        { text: 'Top 100', value: 100 }
-      ],
-      period: '3month',
-      periods: [
-        { text: 'All time', value: 'overall' },
-        { text: 'Last 7 days', value: '7day' },
-        { text: 'Last 1 month', value: '1month' },
-        { text: 'Last 3 months', value: '3month' },
-        { text: 'Last 6 months', value: '6month' },
-        { text: 'Last 12 months', value: '12month' }
-      ]
-    }
-  },
   created () {
-    this.getAlbums()
+    this.updateAlbums(25, '3month')
   },
   computed: {
     ...mapGetters(['topAlbums', 'user'])
   },
   methods: {
     ...mapActions(['getTopAlbums']),
-    getAlbums () {
-      const { limit, period, user } = this
-
-      this.getTopAlbums({ limit, period, user })
+    updateAlbums (limit, period) {
+      this.getTopAlbums({ limit, period, user: this.user })
     }
   },
   components: {
     Album,
+    Controls,
     Spinner
   }
 }
 </script>
 
 <style scoped lang="scss">
-.album-controls {
-  display: flex;
-  justify-content: center;
-
-  .album-control:not(:last-of-type) {
-    margin-right: 10px;
-  }
-}
-
 .albums {
   display: flex;
   flex-wrap: wrap;
