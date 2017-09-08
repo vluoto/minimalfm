@@ -1,36 +1,16 @@
-import localforage from 'localforage'
-
 import * as types from './mutation-types'
 import withQuery from '@/utils/with-query'
 import sign from '@/utils/sign'
+import { saveSession } from '@/utils/auth'
 
 const defaultParams = {
   api_key: process.env.LASTFM_API_KEY,
   format: 'json'
 }
 
-const loadSession = (session) => {
-  return localforage.getItem(
-    'session'
-  ).then(value => {
-    return value
-  })
-}
-
 const q = (query, fetchOptions = {}) => {
   return fetch(withQuery(process.env.LASTFM_API_URL, query), fetchOptions).then(response => {
     return response.json()
-  })
-}
-
-const saveSession = (session) => {
-  return localforage.setItem(
-    'session',
-    session
-  ).then(value => {
-    return value
-  }).catch(err => {
-    console.error(err)
   })
 }
 
@@ -55,18 +35,6 @@ export default {
           saveSession(session).finally(() => {
             resolve()
           })
-        } else {
-          reject()
-        }
-      })
-    })
-  },
-  checkAuth ({ commit }, state) {
-    return new Promise((resolve, reject) => {
-      loadSession().then(session => {
-        if (session) {
-          commit(types.UPDATE_SESSION, session)
-          resolve()
         } else {
           reject()
         }
