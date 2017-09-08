@@ -1,30 +1,17 @@
 <template lang="html">
   <header>
     <nav>
-      <router-link to="/">Recent Tracks</router-link>
-      <router-link to="/top-artists">Top Artists</router-link>
-      <router-link to="/top-tracks">Top Tracks</router-link>
-      <router-link to="/top-albums">Top Albums</router-link>
+      <router-link to="#recent-tracks">Recent Tracks</router-link>
+      <router-link to="#top-artists">Top Artists</router-link>
+      <router-link to="#top-albums">Top Albums</router-link>
+      <router-link to="#top-tracks">Top Tracks</router-link>
     </nav>
-
-    <router-link to="/" class="profile-link">
-      <avatar :name="user"></avatar>
-    </router-link>
   </header>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-import Avatar from '@/components/Avatar'
-
 export default {
-  computed: {
-    ...mapGetters(['user'])
-  },
-  components: {
-    Avatar
-  }
+
 }
 </script>
 

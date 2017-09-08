@@ -14,7 +14,7 @@ export default {
   computed: {
     ...mapGetters(['userInfo']),
     image () {
-      return this.userInfo && this.userInfo.image[0]['#text']
+      return this.userInfo && this.userInfo.image[2]['#text']
     }
   },
   methods: {
@@ -25,7 +25,6 @@ export default {
 
 <style scoped lang="css">
 img {
-  width: 30px;
-  height: 30px;
+  border-radius: 50%;
 }
 </style>

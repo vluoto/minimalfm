@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="recent-tracks">
+  <div id="recent-tracks">
     <h1>Recent Tracks</h1>
 
     <div v-if="recentTracks.length > 0" class="tracks">
@@ -20,7 +20,7 @@ export default {
 
   data () {
     return {
-      limit: 25
+      limit: 10
     }
   },
   created () {

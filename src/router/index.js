@@ -3,10 +3,7 @@ import Router from 'vue-router'
 
 import Auth from '@/components/Auth'
 import Login from '@/components/Login'
-import RecentTracks from '@/components/RecentTracks'
-import TopAlbums from '@/components/TopAlbums'
-import TopArtists from '@/components/TopArtists'
-import TopTracks from '@/components/TopTracks'
+import Profile from '@/components/Profile'
 import store from '@/store'
 
 Vue.use(Router)
@@ -24,8 +21,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'RecentTracks',
-      component: RecentTracks,
+      name: 'Profile',
+      component: Profile,
       beforeEnter: requireAuth
     },
     {
@@ -37,26 +34,14 @@ const router = new Router({
       path: '/auth',
       name: 'Auth',
       component: Auth
-    },
-    {
-      path: '/top-albums',
-      name: 'TopAlbums',
-      component: TopAlbums,
-      beforeEnter: requireAuth
-    },
-    {
-      path: '/top-artists',
-      name: 'TopArtists',
-      component: TopArtists,
-      beforeEnter: requireAuth
-    },
-    {
-      path: '/top-tracks',
-      name: 'TopTracks',
-      component: TopTracks,
-      beforeEnter: requireAuth
     }
-  ]
+  ],
+  // FIXME: Does not get triggered on app load.
+  scrollBehavior (to) {
+    if (to.hash) {
+      return { selector: to.hash }
+    }
+  }
 })
 
 export default router

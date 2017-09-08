@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="top-albums">
+  <div id="top-albums">
     <h1>Top Albums</h1>
 
     <controls :change="updateAlbums"></controls>
