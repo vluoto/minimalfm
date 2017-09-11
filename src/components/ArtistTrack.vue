@@ -21,6 +21,8 @@ import Icon from 'vue-awesome/components/Icon'
 import moment from 'moment'
 import { mapActions } from 'vuex'
 
+const DEFAULT_IMAGE = 'https://lastfm-img2.akamaized.net/i/u/64s/c6f59c1e5e7240a4c0d427abd71f3dbb'
+
 export default {
   name: 'ArtistTrack',
   props: ['track'],
@@ -44,7 +46,7 @@ export default {
     image () {
       const [small] = this.track.image
 
-      return small['#text']
+      return small['#text'] || DEFAULT_IMAGE
     },
     isPlayingNow () {
       return !!(this.track['@attr'] && this.track['@attr'].nowplaying)
@@ -83,6 +85,11 @@ export default {
     width: auto;
     text-align: center;
     font-size: 0;
+
+    img {
+      width: 34px;
+      height: 34px;
+    }
   }
 
   .track-rank {
