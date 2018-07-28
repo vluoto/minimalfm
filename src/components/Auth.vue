@@ -7,12 +7,13 @@ import store from '@/store'
 export default {
   name: 'Auth',
 
-  beforeRouteEnter (to, from, next) {
-    store.dispatch('authenticate', to.query.token).then(() => {
+  async beforeRouteEnter (to, from, next) {
+    try {
+      await store.dispatch('getSession', to.query.token)
       next('/')
-    }).catch(() => {
+    } catch (err) {
       next('/login')
-    })
+    }
   }
 }
 </script>

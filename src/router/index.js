@@ -8,12 +8,13 @@ import store from '@/store'
 
 Vue.use(Router)
 
-export const requireAuth = (to, from, next) => {
-  store.dispatch('restoreSession').then(() => {
+export const requireAuth = async (to, from, next) => {
+  try {
+    await store.dispatch('restoreSession')
     next()
-  }).catch(() => {
+  } catch (err) {
     next('/login')
-  })
+  }
 }
 
 const router = new Router({

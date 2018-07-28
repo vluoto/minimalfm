@@ -1,129 +1,85 @@
+import request from 'superagent'
+
 import * as types from './mutation-types'
-import withQuery from '@/utils/with-query'
-import sign from '@/utils/sign'
-import { restoreSession, saveSession } from '@/utils/auth'
-
-const defaultParams = {
-  api_key: process.env.LASTFM_API_KEY,
-  format: 'json'
-}
-
-const q = (query, fetchOptions = {}) => {
-  return fetch(withQuery(process.env.LASTFM_API_URL, query), fetchOptions).then(response => {
-    return response.json()
-  })
-}
+import { restoreSession, storeSession } from '@/utils/auth'
 
 export default {
-  authenticate ({ commit }, token) {
-    const params = {
-      api_key: defaultParams.api_key,
-      method: 'auth.getSession',
-      token
-    }
+  async getSession ({ commit }, token) {
+    return new Promise(async (resolve, reject) => {
+      const { body: { session } } = await request
+        .get('/api/session')
+        .query({ token })
 
-    const query = {
-      ...defaultParams,
-      ...params,
-      api_sig: sign(params)
-    }
-
-    return new Promise((resolve, reject) => {
-      q(query).then(({ session }) => {
-        if (session) {
-          commit(types.UPDATE_SESSION, session)
-          saveSession(session).finally(() => {
-            resolve()
-          })
-        } else {
-          reject()
-        }
-      })
+      if (session) {
+        commit(types.UPDATE_SESSION, session)
+        storeSession(session).finally(resolve)
+      } else {
+        reject()
+      }
     })
   },
-  getRecentTracks ({ commit, state }, params = {}) {
-    const query = {
-      ...defaultParams,
-      ...params,
-      extended: 1,
-      method: 'user.getRecentTracks'
-    }
+  async getRecentTracks ({ commit }, params = {}) {
+    const { body: { recenttracks: { track: recentTracks } } } = await request
+      .get('/api/recent-tracks')
+      .query(params)
 
-    q(query).then(({ recenttracks }) => commit(types.UPDATE_RECENT_TRACKS, recenttracks.track))
+    commit(types.UPDATE_RECENT_TRACKS, recentTracks)
   },
-  getTopAlbums ({ commit }, params = {}) {
-    const query = {
-      ...defaultParams,
-      ...params,
-      method: 'user.getTopAlbums'
-    }
+  async getTopAlbums ({ commit }, params = {}) {
+    const { body: { topalbums: { album: topAlbums } } } = await request
+      .get('/api/top-albums')
+      .query(params)
 
-    q(query).then(({ topalbums }) => commit(types.UPDATE_TOP_ALBUMS, topalbums.album))
+    commit(types.UPDATE_TOP_ALBUMS, topAlbums)
   },
-  getTopArtists ({ commit }, params = {}) {
-    const query = {
-      ...defaultParams,
-      ...params,
-      method: 'user.getTopArtists'
-    }
+  async getTopArtists ({ commit }, params = {}) {
+    const { body: { topartists: { artist: topArtists } } } = await request
+      .get('/api/top-artists')
+      .query(params)
 
-    q(query).then(({ topartists }) => commit(types.UPDATE_TOP_ARTISTS, topartists.artist))
+    commit(types.UPDATE_TOP_ARTISTS, topArtists)
   },
-  getTopTracks ({ commit }, params) {
-    const query = {
-      ...defaultParams,
-      ...params,
-      method: 'user.getTopTracks'
-    }
+  async getTopTracks ({ commit }, params = {}) {
+    const { body: { toptracks: { track: topTracks } } } = await request
+      .get('/api/top-tracks')
+      .query(params)
 
-    q(query).then(({ toptracks }) => commit(types.UPDATE_TOP_TRACKS, toptracks.track))
+    commit(types.UPDATE_TOP_TRACKS, topTracks)
   },
-  getUserInfo ({ commit }, user) {
-    const query = {
-      ...defaultParams,
-      method: 'user.getInfo',
-      user
-    }
+  async getUserInfo ({ commit }, user) {
+    const { body: { user: userInfo } } = await request
+      .get('/api/user-info')
+      .query({ user })
 
-    q(query).then(({ user }) => { commit(types.UPDATE_USER_INFO, user) })
+    commit(types.UPDATE_USER_INFO, userInfo)
   },
-  loveTrack ({ commit, state }, track) {
-    const params = {
-      api_key: defaultParams.api_key,
-      artist: track.artist.name,
-      method: 'track.love',
-      sk: state.session.key,
-      track: track.name
-    }
+  async loveTrack ({ commit, state }, track) {
+    try {
+      await request
+        .post('/api/love-track')
+        .set('session-id', state.session.key)
+        .send(track)
 
-    const query = {
-      ...defaultParams,
-      ...params,
-      api_sig: sign(params)
+      commit(types.LOVE_TRACK, track)
+    } catch (err) {
+      console.error(err)
     }
-
-    q(query, { method: 'POST' }).then(() => commit(types.LOVE_TRACK, track))
   },
-  restoreSession ({ commit }) {
-    return restoreSession().then((session) => {
-      commit(types.UPDATE_SESSION, session)
-    })
+  async restoreSession ({ commit }) {
+    const session = await restoreSession()
+
+    commit(types.UPDATE_SESSION, session)
   },
-  unloveTrack ({ commit, state }, track) {
-    const params = {
-      api_key: defaultParams.api_key,
-      artist: track.artist.name,
-      method: 'track.unlove',
-      sk: state.session.key,
-      track: track.name
-    }
+  async unloveTrack ({ commit, state }, track) {
+    try {
+      await request
+        .post('/api/unlove-track')
+        .set('session-id', state.session.key)
+        .send(track)
 
-    const query = {
-      ...defaultParams,
-      ...params,
-      api_sig: sign(params)
+      commit(types.UNLOVE_TRACK, track)
+    } catch (err) {
+      console.error(err)
     }
-
-    q(query, { method: 'POST' }).then(() => commit(types.UNLOVE_TRACK, track))
   }
 }

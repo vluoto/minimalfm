@@ -1,16 +1,10 @@
 <template lang="html">
-  <a class="button" :href="authUri">Sign in with Last.fm</a>
+  <a class="button" href="/api/authenticate">Sign in with Last.fm</a>
 </template>
 
 <script>
 export default {
-  name: 'Login',
-
-  computed: {
-    authUri () {
-      return `https://last.fm/api/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=http://localhost:8080/auth`
-    }
-  }
+  name: 'Login'
 }
 </script>
 
