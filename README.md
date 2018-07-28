@@ -1,4 +1,4 @@
-# minimalfm
+# minimalfm-frontend
 
 > a minimal [last.fm](https://last.fm) client
 
