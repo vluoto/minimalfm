@@ -7,7 +7,9 @@
     <div v-if="topArtists.length > 0" class="artists">
       <artist v-for="artist in topArtists" :artist="artist" :key="artist.id" />
     </div>
-    <spinner v-else></spinner>
+    <div v-else class="artists">
+      <artist-skeleton v-for="(n, index) in limit" :key="index" />
+    </div>
   </div>
 </template>
 
@@ -15,14 +17,22 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import Artist from '@/components/Artist'
+import ArtistSkeleton from '@/components/ArtistSkeleton'
 import Controls from '@/components/Controls'
-import Spinner from '@/components/Spinner'
 
 export default {
   name: 'TopArtists',
 
+  data () {
+    return {
+      limit: 25,
+      period: '3month'
+    }
+  },
   created () {
-    this.updateArtists(25, '3month')
+    const { limit, period } = this
+
+    this.updateArtists(limit, period)
   },
   computed: {
     ...mapGetters(['topArtists', 'user'])
@@ -35,8 +45,8 @@ export default {
   },
   components: {
     Artist,
-    Controls,
-    Spinner
+    ArtistSkeleton,
+    Controls
   }
 }
 </script>

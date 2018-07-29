@@ -7,7 +7,9 @@
     <div v-if="topAlbums.length > 0" class="albums">
       <album v-for="album in topAlbums" :album="album" :key="album.id" />
     </div>
-    <spinner v-else></spinner>
+    <div v-else class="albums">
+      <album-skeleton v-for="(n, index) in limit" :key="index" />
+    </div>
   </div>
 </template>
 
@@ -15,14 +17,22 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import Album from '@/components/Album'
+import AlbumSkeleton from '@/components/AlbumSkeleton'
 import Controls from '@/components/Controls'
-import Spinner from '@/components/Spinner'
 
 export default {
   name: 'TopAlbums',
 
+  data () {
+    return {
+      limit: 25,
+      period: '3month'
+    }
+  },
   created () {
-    this.updateAlbums(25, '3month')
+    const { limit, period } = this
+
+    this.updateAlbums(limit, period)
   },
   computed: {
     ...mapGetters(['topAlbums', 'user'])
@@ -35,8 +45,8 @@ export default {
   },
   components: {
     Album,
-    Controls,
-    Spinner
+    AlbumSkeleton,
+    Controls
   }
 }
 </script>

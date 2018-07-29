@@ -5,7 +5,9 @@
     <div v-if="recentTracks.length > 0" class="tracks">
       <artist-track v-for="(track, index) in recentTracks" :track="track" :key="index" />
     </div>
-    <spinner v-else></spinner>
+    <div v-else class="tracks">
+      <artist-track-skeleton v-for="(n, index) in limit" :key="index" />
+    </div>
   </div>
 </template>
 
@@ -13,7 +15,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import ArtistTrack from '@/components/ArtistTrack'
-import Spinner from '@/components/Spinner'
+import ArtistTrackSkeleton from '@/components/ArtistTrackSkeleton'
 
 export default {
   name: 'RecentTracks',
@@ -36,7 +38,7 @@ export default {
   },
   components: {
     ArtistTrack,
-    Spinner
+    ArtistTrackSkeleton
   }
 }
 </script>
