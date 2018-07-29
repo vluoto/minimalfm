@@ -42,6 +42,7 @@ html {
   font-family: 'Arvo', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-top: 85px;
 }
 
 h1 {
