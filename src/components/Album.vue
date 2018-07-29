@@ -10,7 +10,9 @@ const DEFAULT_IMAGE = 'https://lastfm-img2.akamaized.net/i/u/300s/c6f59c1e5e7240
 
 export default {
   name: 'Album',
-  props: ['album'],
+  props: {
+    album: Object
+  },
 
   computed: {
     image () {

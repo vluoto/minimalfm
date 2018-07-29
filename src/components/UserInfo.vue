@@ -10,7 +10,9 @@ import Avatar from '@/components/Avatar'
 import AvatarSkeleton from '@/components/AvatarSkeleton'
 
 export default {
-  props: ['name'],
+  props: {
+    name: String
+  },
 
   created () {
     this.getUserInfo(this.name)

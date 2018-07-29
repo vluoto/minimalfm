@@ -8,7 +8,9 @@
 <script>
 export default {
   name: 'Artist',
-  props: ['artist'],
+  props: {
+    artist: Object
+  },
 
   computed: {
     image () {

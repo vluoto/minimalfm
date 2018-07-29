@@ -12,7 +12,9 @@
 
 <script>
 export default {
-  props: ['change'],
+  props: {
+    change: Function
+  },
 
   data () {
     return {

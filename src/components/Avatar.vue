@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  props: ['image', 'name']
+  props: {
+    image: String,
+    name: String
+  }
 }
 </script>
 

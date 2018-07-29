@@ -25,7 +25,9 @@ const DEFAULT_IMAGE = 'https://lastfm-img2.akamaized.net/i/u/64s/c6f59c1e5e7240a
 
 export default {
   name: 'ArtistTrack',
-  props: ['track'],
+  props: {
+    track: Object
+  },
 
   computed: {
     alt () {
