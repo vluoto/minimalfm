@@ -30,7 +30,7 @@ export default {
     }
   },
   created () {
-    const { limit, period } = '3month'
+    const { limit, period } = this
 
     this.updateTracks(limit, period)
   },
