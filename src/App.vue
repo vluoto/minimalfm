@@ -89,6 +89,7 @@ select {
 }
 
 .flip-container:hover .flip {
+  transition-delay: 0.3s;
   transform: rotateY(180deg);
 }
 
