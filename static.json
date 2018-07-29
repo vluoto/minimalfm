@@ -1,0 +1,9 @@
+{
+  "root": "dist",
+  "clean_urls": false,
+  "proxies": {
+    "/api/": {
+      "origin": "https://minimalfm-backend.herokuapp.com/"
+    }
+  }
+}
