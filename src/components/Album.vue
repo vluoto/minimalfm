@@ -1,7 +1,15 @@
 <template lang="html">
-  <div class="album">
-    <span class="album-name">{{ album.name }}</span>
-    <img class="album-image" :src="image" :alt="album.name">
+  <div class="album flip-container">
+    <div class="flip">
+      <div class="flip-front">
+        <img class="album-image" :src="image" :alt="album.name">
+      </div>
+      <div class="flip-back">
+        <div class="album-name">
+          <span>{{ album.name }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,12 +37,16 @@ export default {
   position: relative;
 
   .album-name {
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    color: whitesmoke;
     font-size: 20px;
-    position: absolute;
     text-transform: uppercase;
-    bottom: 0;
-    left: 5px;
+    text-align: center;
   }
 
   .album-image {

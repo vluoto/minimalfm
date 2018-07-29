@@ -78,4 +78,34 @@ select {
   cursor: pointer;
   outline: 0;
 }
+
+.flip-container {
+  perspective: 1000px;
+}
+
+.flip-container, .flip-front, .flip-back {
+  width: 300px;
+  height: 300px;
+}
+
+.flip-container:hover .flip {
+  transform: rotateY(180deg);
+}
+
+.flip {
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-front, .flip-back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.flip-back {
+  transform: rotateY(180deg)
+}
 </style>

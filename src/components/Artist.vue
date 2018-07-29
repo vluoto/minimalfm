@@ -1,7 +1,15 @@
 <template lang="html">
-  <div class="artist">
-    <span class="artist-name">{{ artist.name }}</span>
-    <img class="artist-image" :src="image" :alt="artist.name">
+  <div class="artist flip-container">
+    <div class="flip">
+      <div class="flip-front">
+        <img class="artist-image" :src="image" :alt="artist.name">
+      </div>
+      <div class="flip-back">
+        <div class="artist-name">
+          <span>{{ artist.name }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,12 +35,21 @@ export default {
   position: relative;
 
   .artist-name {
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    color: whitesmoke;
     font-size: 20px;
-    position: absolute;
     text-transform: uppercase;
-    bottom: 0;
-    left: 5px;
+    text-align: center;
+  }
+
+  .artist-image {
+    width: 300px;
+    height: 300px;
   }
 }
 </style>
