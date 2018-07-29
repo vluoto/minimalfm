@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style>
-@import url('http://fonts.googleapis.com/css?family=Arvo');
+@import url('https://fonts.googleapis.com/css?family=Arvo');
 
 html, body {
   height: 100%;
